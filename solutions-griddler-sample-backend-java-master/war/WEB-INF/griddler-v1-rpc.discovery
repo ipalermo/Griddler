@@ -1,0 +1,532 @@
+{
+ "kind": "discovery#rpcDescription",
+ "etag": "\"ADiYQGKhdYR9rpbhIFHih-UBYRs/ubMHWp2BtvnLTfMFpdhbbso_T7c\"",
+ "discoveryVersion": "v1",
+ "id": "griddler:v1",
+ "name": "griddler",
+ "version": "v1",
+ "description": "Griddler API",
+ "ownerDomain": "google.com",
+ "ownerName": "google.com",
+ "packagePath": "cloud.solutions.sampleapps.griddler.client",
+ "icons": {
+  "x16": "http://www.google.com/images/icons/product/search-16.gif",
+  "x32": "http://www.google.com/images/icons/product/search-32.gif"
+ },
+ "protocol": "rpc",
+ "rootUrl": "https://griddlerid.appspot.com/_ah/api/",
+ "rpcUrl": "https://griddlerid.appspot.com/_ah/api/rpc",
+ "rpcPath": "/_ah/api/rpc",
+ "parameters": {
+  "alt": {
+   "type": "string",
+   "description": "Data format for the response.",
+   "default": "json",
+   "enum": [
+    "json"
+   ],
+   "enumDescriptions": [
+    "Responses with Content-Type of application/json"
+   ],
+   "location": "query"
+  },
+  "fields": {
+   "type": "string",
+   "description": "Selector specifying which fields to include in a partial response.",
+   "location": "query"
+  },
+  "key": {
+   "type": "string",
+   "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+   "location": "query"
+  },
+  "oauth_token": {
+   "type": "string",
+   "description": "OAuth 2.0 token for the current user.",
+   "location": "query"
+  },
+  "prettyPrint": {
+   "type": "boolean",
+   "description": "Returns response with indentations and line breaks.",
+   "default": "true",
+   "location": "query"
+  },
+  "quotaUser": {
+   "type": "string",
+   "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+   "location": "query"
+  },
+  "userIp": {
+   "type": "string",
+   "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+   "location": "query"
+  }
+ },
+ "auth": {
+  "oauth2": {
+   "scopes": {
+    "https://www.googleapis.com/auth/userinfo.email": {
+     "description": "View your email address"
+    }
+   }
+  }
+ },
+ "schemas": {
+  "Board": {
+   "id": "Board",
+   "type": "object",
+   "properties": {
+    "allottedTime": {
+     "type": "string",
+     "format": "int64"
+    },
+    "answers": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "gridDefinition": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "riddles": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    }
+   }
+  },
+  "Game": {
+   "id": "Game",
+   "type": "object",
+   "properties": {
+    "board": {
+     "$ref": "Board"
+    },
+    "gamePlays": {
+     "type": "array",
+     "items": {
+      "$ref": "GamePlay"
+     }
+    },
+    "id": {
+     "type": "string",
+     "format": "int64"
+    }
+   }
+  },
+  "GamePlay": {
+   "id": "GamePlay",
+   "type": "object",
+   "properties": {
+    "correctAnswers": {
+     "type": "array",
+     "items": {
+      "type": "integer",
+      "format": "int32"
+     }
+    },
+    "finished": {
+     "type": "boolean"
+    },
+    "isWinner": {
+     "type": "boolean"
+    },
+    "player": {
+     "$ref": "Player"
+    },
+    "timeLeft": {
+     "type": "string",
+     "format": "int64"
+    }
+   }
+  },
+  "GamePlayStatus": {
+   "id": "GamePlayStatus",
+   "type": "object",
+   "properties": {
+    "correctAnswers": {
+     "type": "array",
+     "items": {
+      "type": "integer",
+      "format": "int32"
+     }
+    },
+    "timeLeft": {
+     "type": "string",
+     "format": "int64"
+    }
+   }
+  },
+  "Invitation": {
+   "id": "Invitation",
+   "type": "object",
+   "properties": {
+    "gameId": {
+     "type": "string",
+     "format": "int64"
+    },
+    "invitationId": {
+     "type": "string",
+     "format": "int64"
+    },
+    "status": {
+     "$ref": "Status"
+    }
+   }
+  },
+  "Player": {
+   "id": "Player",
+   "type": "object",
+   "properties": {
+    "id": {
+     "type": "string",
+     "format": "int64"
+    },
+    "nickname": {
+     "type": "string"
+    },
+    "statistics": {
+     "$ref": "PlayerStatistics"
+    }
+   }
+  },
+  "PlayerCollection": {
+   "id": "PlayerCollection",
+   "type": "object",
+   "properties": {
+    "items": {
+     "type": "array",
+     "items": {
+      "$ref": "Player"
+     }
+    }
+   }
+  },
+  "PlayerStatistics": {
+   "id": "PlayerStatistics",
+   "type": "object",
+   "properties": {
+    "numberOfGames": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "numberOfWins": {
+     "type": "integer",
+     "format": "int32"
+    }
+   }
+  },
+  "Status": {
+   "id": "Status",
+   "type": "string",
+   "enum": [
+    "ACCEPTED",
+    "CANCELED",
+    "DECLINED",
+    "SENT"
+   ],
+   "enumDescriptions": [
+    "",
+    "",
+    "",
+    ""
+   ]
+  }
+ },
+ "methods": {
+  "griddler.gameEndpoint.acceptInvitation": {
+   "id": "griddler.gameEndpoint.acceptInvitation",
+   "parameters": {
+    "gameId": {
+     "type": "string",
+     "required": true,
+     "format": "int64"
+    },
+    "invitationId": {
+     "type": "string",
+     "required": true,
+     "format": "int64"
+    }
+   },
+   "parameterOrder": [
+    "gameId",
+    "invitationId"
+   ],
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "griddler.gameEndpoint.cancelInvitation": {
+   "id": "griddler.gameEndpoint.cancelInvitation",
+   "parameters": {
+    "gameId": {
+     "type": "string",
+     "required": true,
+     "format": "int64"
+    },
+    "invitationId": {
+     "type": "string",
+     "required": true,
+     "format": "int64"
+    }
+   },
+   "parameterOrder": [
+    "gameId",
+    "invitationId"
+   ],
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "griddler.gameEndpoint.declineInvitation": {
+   "id": "griddler.gameEndpoint.declineInvitation",
+   "parameters": {
+    "gameId": {
+     "type": "string",
+     "required": true,
+     "format": "int64"
+    },
+    "invitationId": {
+     "type": "string",
+     "required": true,
+     "format": "int64"
+    }
+   },
+   "parameterOrder": [
+    "gameId",
+    "invitationId"
+   ],
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "griddler.gameEndpoint.getGame": {
+   "id": "griddler.gameEndpoint.getGame",
+   "allowGet": true,
+   "parameters": {
+    "id": {
+     "type": "string",
+     "required": true,
+     "format": "int64"
+    }
+   },
+   "parameterOrder": [
+    "id"
+   ],
+   "returns": {
+    "$ref": "Game"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "griddler.gameEndpoint.getInvitationStatus": {
+   "id": "griddler.gameEndpoint.getInvitationStatus",
+   "allowGet": true,
+   "parameters": {
+    "gameId": {
+     "type": "string",
+     "required": true,
+     "format": "int64"
+    },
+    "invitationId": {
+     "type": "string",
+     "required": true,
+     "format": "int64"
+    }
+   },
+   "parameterOrder": [
+    "gameId",
+    "invitationId"
+   ],
+   "returns": {
+    "$ref": "Invitation"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "griddler.gameEndpoint.startMultiplayerGame": {
+   "id": "griddler.gameEndpoint.startMultiplayerGame",
+   "parameters": {
+    "boardLevel": {
+     "type": "integer",
+     "required": true,
+     "format": "int32"
+    },
+    "inviteeId": {
+     "type": "string",
+     "required": true,
+     "format": "int64"
+    }
+   },
+   "parameterOrder": [
+    "boardLevel",
+    "inviteeId"
+   ],
+   "returns": {
+    "$ref": "Invitation"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "griddler.gameEndpoint.startMultiplayerGameByGooglePlusId": {
+   "id": "griddler.gameEndpoint.startMultiplayerGameByGooglePlusId",
+   "parameters": {
+    "boardLevel": {
+     "type": "integer",
+     "required": true,
+     "format": "int32"
+    },
+    "inviteeGooglePlusId": {
+     "type": "string",
+     "required": true
+    }
+   },
+   "parameterOrder": [
+    "boardLevel",
+    "inviteeGooglePlusId"
+   ],
+   "returns": {
+    "$ref": "Invitation"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "griddler.gameEndpoint.startSinglePlayerGame": {
+   "id": "griddler.gameEndpoint.startSinglePlayerGame",
+   "parameters": {
+    "boardLevel": {
+     "type": "integer",
+     "required": true,
+     "format": "int32"
+    }
+   },
+   "parameterOrder": [
+    "boardLevel"
+   ],
+   "returns": {
+    "$ref": "Game"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "griddler.gameEndpoint.submitAnswers": {
+   "id": "griddler.gameEndpoint.submitAnswers",
+   "parameters": {
+    "id": {
+     "type": "string",
+     "required": true,
+     "format": "int64"
+    },
+    "resource": {
+     "$ref": "GamePlayStatus"
+    }
+   },
+   "parameterOrder": [
+    "resource",
+    "id"
+   ],
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "griddler.playerEndpoint.assignPlayerPlusId": {
+   "id": "griddler.playerEndpoint.assignPlayerPlusId",
+   "parameters": {
+    "googlePlusId": {
+     "type": "string",
+     "required": true
+    }
+   },
+   "parameterOrder": [
+    "googlePlusId"
+   ],
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "griddler.playerEndpoint.get": {
+   "id": "griddler.playerEndpoint.get",
+   "allowGet": true,
+   "returns": {
+    "$ref": "Player"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "griddler.playerEndpoint.insert": {
+   "id": "griddler.playerEndpoint.insert",
+   "parameters": {
+    "googlePlusId": {
+     "type": "string",
+     "required": true
+    }
+   },
+   "parameterOrder": [
+    "googlePlusId"
+   ],
+   "returns": {
+    "$ref": "Player"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "griddler.playerEndpoint.list": {
+   "id": "griddler.playerEndpoint.list",
+   "allowGet": true,
+   "returns": {
+    "$ref": "PlayerCollection"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "griddler.playerEndpoint.registerDevice": {
+   "id": "griddler.playerEndpoint.registerDevice",
+   "parameters": {
+    "deviceId": {
+     "type": "string",
+     "required": true
+    },
+    "deviceType": {
+     "type": "integer",
+     "required": true,
+     "format": "int32"
+    }
+   },
+   "parameterOrder": [
+    "deviceId",
+    "deviceType"
+   ],
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "griddler.playerEndpoint.unRegisterDevice": {
+   "id": "griddler.playerEndpoint.unRegisterDevice",
+   "parameters": {
+    "deviceId": {
+     "type": "string",
+     "required": true
+    }
+   },
+   "parameterOrder": [
+    "deviceId"
+   ],
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  }
+ }
+}
