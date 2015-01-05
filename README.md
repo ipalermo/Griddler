@@ -77,6 +77,26 @@ This sample source code and project is designed to work with Eclipse. It was tes
 
 18. Now you are ready to configure and run [Griddler Android client](https://github.com/GoogleCloudPlatform/solutions-griddler-sample-android-client) and/or [Griddler iOS client](https://github.com/GoogleCloudPlatform/solutions-griddler-sample-iOS-client)
 
+19. Import the Android project into Eclipse into the same workspace with Griddler mobile game backend (File->Import->General->Existing Projects into Workspace and select the directory where you have unzipped the downloaded project).
+
+20. Configure Google Play Services by following the Setup Google Play Services SDK section from [Android documentation](https://developer.android.com/google/play-services/setup.html). Copy google-play-services_lib directory such that it is a sibling of Griddler directory in the file system and then import google-play-services_lib to Eclipse as "Android->Existing Android Code into Workspace". This sample was tested with revision 10 of Google Play Services. If you see any compilation errors with GooglePlayServices this typically indidates that the version of the google-play-services_lib is not current.
+
+21. Make sure that google-play-services.lib is referenced by Griddler project: select Griddler project in Project Explorer, choose Properties from the context menu and select Android node in the left panel. If google-play-services.lib is not listed as a library then click Add and choose google-play-services.lib and click OK.
+
+22. In the Package Explorer, select "Griddler - App Engine" project and from the context menu select Google -> Generate Cloud Endpoint Client Library. This should automatically copy the generated endpoint client libraries to you Griddler Android project. If it didn't you can drag endpoint-libs from the "Griddler - App Engine" to your "Griddler" project in the Package Explorer.
+
+23. If Eclipse reports a missing required source folder, remove it in Properties -> Java Build Path -> Source.
+
+24. Edit GameBackendSettings.java in com.google.cloud.solutions.griddler.android package and update the following constants:
+
+  String AUDIENCE_ID = "server:client_id:Your Web Client ID"; // Use the Web Client ID created when setting up Griddler Java backend. Keep "server:client_id:".
+
+  String GCM_SENDER_ID = "Your project number from API Console"; // This is the numeric project number of your Google Cloud project that you created when setting up Griddler backend.
+
+  String DEFAULT_ROOT_URL = "https://your_app_id.appspot.com/_ah/api/"; // Use alphanumeric project id of your Google Cloud project (which is also the app id of your App Engine application) that you created when setting up Griddler backend.
+
+25. Connect your physical Android device with USB debugging enabled, select Griddler project and then Run As->Android Application.
+
 [1]: https://developers.google.com/appengine
 [2]: https://developers.google.com/appengine/docs/java/endpoints/
 [3]: http://java.com/en/
