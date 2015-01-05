@@ -1,6 +1,6 @@
-# Griddler Mobile Game Java Backend Sample
+# Griddler Mobile Game
 
-This project is a Java implementation of Griddler mobile game. It includes the game backend hosted on Google App Engine, and an Android client that connects to server through its REST API.
+This project is a Java implementation of Griddler mobile game. It includes the game java backend hosted on Google App Engine, and an Android client that connects to server through its REST API.
 
 ## Copyright
 Copyright 2014 . All Rights Reserved.
